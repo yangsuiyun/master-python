@@ -86,3 +86,84 @@ flake8 combines upper tools and outputs a single report.
 pylint is a far more advanced—and in some cases better—code quality checker. The 
 power of pylint does come with a few drawbacks, however. Whereas flake8 is a 
 really fast, light, and safe quality check, pylint has far more advanced introspection and is much slower for this reason.
+
+## Scope matters
+
+### Function arguments
+Default parameter of function may cause unexpected results.
+```python
+def spam(key, value, list_=[], dict_={}):
+    list_.append(value)
+    dict_[key] = value
+    print('List: %r' % list_)
+    print('Dict: %r' % dict_)
+    
+spam('key 1', 'value 1')
+spam('key 2', 'value 2')
+
+#Output:
+List:['value 1']
+Dict:{'key 1': 'value 1'}
+List:['value 1', 'value 2']
+Dict:{'key 1': 'value 1', 'key 2': 'value 2'}
+```
+list_ and dict_ are shared by multiple calls. Need to avoid using mutable objects as default parameters in a function. Safe way as follows:
+```python
+def spam(key, value, list_=None, dict_=None):
+    if list_ is None:
+        list_ = []
+    if dict_ is None:
+        dict_ {}
+    list_.append(value)
+    dict_[key] = value
+```
+### Modifying variables in th global scope
+Avoid to change global variable in a function. Global variable should be stated with 'global' first before to use it in a function.
+```python
+>>> def eggs():
+... spam += 1
+... print('Spam: %r' % spam)
+
+>>> eggs()
+Traceback (most recent call last):
+...
+UnboundLocalError: local variable 'spam' referenced before assignment
+```
+'spam += 1' is translated to 'spam = spam + 1' and anything containing 'spam =' makes the variable local to the function scope. Since the local variable is being assigned at that point, it has no value yet and is tried ti be used. 
+
+## Modifying while iterating
+While iterating through mutable objects such as lists, dicts, or sets, you cannot modify them.
+```python
+for key in dict_:
+    del dict_[key]
+```
+There would be a RuntimeError. It can be avoiding by coping the object.
+```python
+for key in list(dict_):
+    del dict_[key]
+```
+
+## Late binding - be careful with closures
+The problem with closures in Python is that Python tries to bind its variables as late as possible for performance reasons. Side effects as follow:
+```python
+eggs = [lambda a: i * a for i in range(3)]
+for egg in eggs:
+    print(egg(5))
+
+#Output:
+10
+10
+10
+```
+One alternative is to force immediate binding by currying the function with 'partial'
+```python
+import functools
+
+eggs = [functools.partial(lambda i, a: i * a, i) for i in range(3)]
+
+for egg in eggs:
+    print(egg(5))
+```
+
+## Import collisions
+It would be better to import local package with a relative import. It can clearly tell others this package from local scope instead of another package.
