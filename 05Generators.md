@@ -10,7 +10,7 @@
 * cannot get specific items without yielding all values before that index
 * cannot restart a generator
 
-# creation
+## creation
 1. function using 'yield'
 
     >>> def generator():
@@ -116,3 +116,18 @@ One problem of generators is results are usable only once. The tee can split gen
 >>> next(b)
 'eggs'
 ```
+## generating from generators
+Sometime, we need to return from sub-generators or sequences, using *yield form*  to make code shorter.
+```python
+# 
+>>> def powerset(sequence):
+...     for size in range(len(sequence) + 1):
+...         for item in itertools.combinations(sequence, size):
+...             yield item
+
+# with yield from
+>>> def powerset(sequence):
+...     for size in range(len(sequence) + 1):
+...         yield from itertools.combinations(sequence, size)
+```
+
