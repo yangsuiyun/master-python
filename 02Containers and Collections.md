@@ -1,13 +1,12 @@
 # List
-append, get, set and len take O(1) time, remove, insert, max, min and in have O(n) time complexity.
-When try to delete remove some items in a list, it better to use List comprehension and filter to do that.
+*append*, *get*, *set* and *len* take O(1) time, *remove*, *insert*, *max*, *min* and *in* have O(n) time complexity.
+When try to delete some items in a list, it would be better use List comprehension and filter to do that.
 ```python
 >>> primes = set((1, 2, 3, 5, 7))
 # Classic solution
 >>> items = list(range(10))
 >>> for prime in primes:
-...
-items.remove(prime)
+...     items.remove(prime)
 >>> items
 [0, 4, 6, 8, 9]
 # List comprehension
@@ -23,6 +22,7 @@ items.remove(prime)
 # dict - unsorted but a fast map of items
 The way a dict works is by converting the key to a hash using the
 hash function (calls the __hash__ function of an object) and storing it in a hash table. There may be a hash collision(two or more keys has a same hash value) and runtime can actually increase to O(n) in the worst case where all keys have the same hash.
+
 Another, it won't actually resize the dictionary in memory yet when deleting items form a dictionary. The result is that both copying and iterating the entire dictionary take O(max) time. Only way to work around this issue is by recreating the dictionary.
 
 # set 
@@ -36,11 +36,11 @@ spam > sp |True | True if every item in the latter is in the first
 
 # tuple - the immutable list
 They are hashable, they can use as a key in a dict.
+
     a = {(1,2,3): 'spam'}
 Another useful feature is to unpack and pack objects with a variable number of items:
 ```python
-# Unpack with variable length objects which actually assigns as a
-list, not a tuple
+# Unpack with variable length objects which actually assigns as a list, not a tuple
 >>> spam, *eggs = 1, 2, 3, 4
 >>> spam
 1
@@ -67,7 +67,7 @@ list, not a tuple
 ```
 
 # ChainMap
- a ChainMap is an updatable view over multiple dicts, and it behaves just like a normal dict. Classical use case as follows:
+ A ChainMap is an updatable view over multiple dicts, and it behaves just like a normal dict. Classical use case as follows:
  ## search through multiple dictionnaries at once
  ChainMap can sotre multiple dictionnaries by reference. Multiple dictionnaries can be 'get' and 'pop' at once. And when sub dictionary change, ChainMap also changed.
  ```python
@@ -121,7 +121,7 @@ It used to count each elements of a list, a string, or a tuple.
 ## create
 1. define with tracked data
 
-    obj = Counter('aabbbcc)
+    obj = Counter('aabbbcc')
 
 2. define with a dict, it's result of counting
 
@@ -182,13 +182,12 @@ defaultdict(<class 'int'>, {'spam': 5})
 defaultdict is a good method to implement tree.
 ```python
 >>> def tree():
-...return collections.defaultdict(tree)
+...     return collections.defaultdict(tree)
 # Build the tree:
 >>> taxonomy = tree()
 >>> reptilia = taxonomy['Chordata']['Vertebrata']['Reptilia']
 >>> reptilia['Squamata']['Serpentes']['Pythonidae'] = [
-...
-'Liasis', 'Morelia', 'Python']
+...                         'Liasis', 'Morelia', 'Python']
 # The actual contents of the tree
 >>> print(json.dumps(taxonomy, indent=4))
 {
@@ -240,9 +239,9 @@ Point(x=4, y=6, z=5)
 ```python
 >>> import enum
 >>> class Color(enum.Enum):
-... red = 1
-... green = 2
-... blue = 3
+...     red = 1
+...     green = 2
+...     blue = 3
 
 >>> Color.red.name
 'red'
@@ -257,14 +256,14 @@ True
 
 #Enum is iterable
 >>> for color in Color:
-...color
+...     color
 ```
 
 You can make value comparisons work through inheritance of specific types,
 and this works for every type—not just integers but (your own) custom types as well.
 ```python
 >>> class Spam(str, enum.Enum):
-...EGGS = 'eggs'
+...     EGGS = 'eggs'
 >>> Spam.EGGS == 'eggs'
 True
 ```
@@ -295,8 +294,7 @@ Like heapq, it works on a standard list and expects that list to always be sorte
 
 Adding items to the list using the bisect algorithm can be very slow because an insert on a list
 takes O(n) . Effectively, creating a sorted list using bisect takes O(n*n) , which is quite
-slow, especially because creating the same sorted list using heapq or sorted takes O(n
-* log(n)) instead.
+slow, especially because creating the same sorted list using heapq or sorted takes O(n * log(n)) instead.
 ```python
 >>> import bisect
 Using the regular sort:

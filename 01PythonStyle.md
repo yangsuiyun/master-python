@@ -4,7 +4,7 @@
 PEP8 PEP20  need to compared here
 
 ## Use f-string to format a string
-After python 3.6, f-string is suggested to use rather than %-formatting and str.format(). It much more easily readable and faster.
+After python 3.6, f-string is suggested to use rather than %-formatting or str.format(). It is much more easily readable and faster.
 * Multiline f-strings
 ```python
 >>> message = (
