@@ -1,6 +1,6 @@
 # Install packages
 During development, there are two ways to create a link within site-packages of the developing package.
-* pip install -e package_directory
+* pip install -e package_directory (**recommand**)
 * python setup.py develop
 
 # setup config
