@@ -121,8 +121,10 @@ It used to count each elements of a list, a string, or a tuple.
 ## create
 1. define with tracked data
 
-    obj = Counter('aabbbcc')
-
+```python
+from collection import Counter
+obj = Counter('aabbbcc')
+```
 2. define with a dict, it's result of counting
 
     obj = Counter({'a':2, 'b':3, 'c':2})
