@@ -134,5 +134,3 @@ islice used to slice generators
 
     >>> list(itertools.islice(itertools.count(), 2, 7))
     [2, 3, 4, 5, 6]
-    
-   
