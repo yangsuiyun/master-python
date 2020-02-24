@@ -82,7 +82,7 @@ None
 200
 ```
 ## It maintains a chain of defaults
-Configuration of command lines can from: command line arguments, environment variables, local files, etc. And there is a notion of priority of these sources. ChinaMap always get a value of key from left sub-dictionary to lef sub-dictionary.
+Configuration of command lines can from: command line arguments, environment variables, local files, etc. And there is a notion of priority of these sources. ChinaMap always get a value of key from left sub-dictionary to right sub-dictionary.
 ```python
 # cli.py
 import argparse
@@ -311,10 +311,10 @@ Using the regular sort:
 [1, 2, 3, 5]
 Using bisect:
 >>> sorted_list = []
->>> bisect.insort(sorted_list, 5) # O(n) = O(1)
->>> bisect.insort(sorted_list, 3) # O(n) = O(2)
->>> bisect.insort(sorted_list, 1) # O(n) = O(3)
->>> bisect.insort(sorted_list, 2) # O(n) = O(4)
+>>> bisect.insert(sorted_list, 5) # O(n) = O(1)
+>>> bisect.insert(sorted_list, 3) # O(n) = O(2)
+>>> bisect.insert(sorted_list, 1) # O(n) = O(3)
+>>> bisect.insert(sorted_list, 2) # O(n) = O(4)
 >>> sorted_list
 [1, 2, 3, 5]
 ```
