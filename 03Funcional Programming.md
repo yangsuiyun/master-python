@@ -2,17 +2,17 @@
 ## Comprehensions
 1. list comprehensions
 
-    >>> [x*y for x in range(3) for y in range(3)]
+     [x*y for x in range(3) for y in range(3)]
     [0, 0, 0, 0, 1, 2, 0, 2, 4]
 
 2. dict comprehensions
 
-    >>> {x: x ** 2 for x in range(10) if x % 2}
+     {x: x ** 2 for x in range(10) if x % 2}
     {1: 1, 3: 9, 9: 81, 5: 25, 7: 49}   
 
 3. set comprehensions
 
-    >>> {x*y for x in range(3) for y in range(3)}
+     {x*y for x in range(3) for y in range(3)}
     {0, 1, 2, 4}
 
 ## partial - no need to repeat all arguments every time
