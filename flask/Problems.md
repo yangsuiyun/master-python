@@ -37,3 +37,21 @@ location /swaggerui/ {
        proxy_set_header X-Forwarded-Proto https;
     }
 ```
+
+# Special exception
+## Flask died and failed to write DB
+* Issue detail
+
+A flask application under uWSGI deploied in K8s. It crashed without any exception randomly after flak trying to write DB.
+DB is postgresql.
+
+* Root cause
+A connectoin between postgresql and sqlalchemy is supported by both.
+Connection live time in postgresql is three hours by default. Buth, Flask-sqlalchemy connection live time is different. 
+Sometimes the connection is destoried in postgresql, otherwise flask don't know yet. And still use the old connection. 
+There will be an error. No exception throwed out is weird.
+
+* Solution
+
+Set connection recycle time in a short time.
+    SQLALCHEMY_POOL_RECYCLE=10
