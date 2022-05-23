@@ -12,11 +12,11 @@
 
 ## creation
 1. function using 'yield'
-
+```python
     >>> def generator():
     ...     yield 'this is a generator'
     ...     return 'returning from a generator'
-
+```    
 2. Generator comprehensions
 
     >>> generator = (x ** 2 for x in range(4))
